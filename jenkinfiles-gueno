@@ -179,7 +179,9 @@ stage('build ') {
     stage('Deploy with docker ') {
             steps {
                sh '''
-               docker run -d -p 4237:8080 devopseasylearning2021/gueno:$ImageTAG 
+	       docker rm -f deploy-gueno || true
+               docker run -d --name deploy-gueno -p 4237:8080 devopseasylearning2021/gueno:$ImageTAG 
+	       curl ifconfig.co
                 '''
             }
         }
